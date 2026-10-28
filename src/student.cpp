@@ -160,16 +160,13 @@ void postorder(const Node* root) {
 //     clear(root);              // aman, tidak terjadi apa-apa
 // =============================================================================
 void clear(Node*& root) {
-    if (root == NULL) {
-        return 0;
+    if (root == nullptr) {
+        return;
     }
-
-    if (root->left == NULL && root->right == NULL) {
-        return 1;
-    }
-
-    return jumlahDaun(root->left) + jumlahDaun(root->right);
-    return 0;
+    clear(root->left);
+    clear(root->right);
+    delete root;
+    root = nullptr;
 }
 
 // =============================================================================
@@ -207,12 +204,16 @@ void clear(Node*& root) {
 //     3                           masih punya satu cabang)
 // =============================================================================
 int jumlahDaun(const Node* root) {
-    return 0;
-    if (root == nullptr) {
+    if (root == NULL) {
         return 0;
     }
-    return 1 + jumlahDaun(root->left) + jumlahDaun(root->right);
 
+    if (root->left == NULL && root->right == NULL) {
+        return 1;
+    }
+
+    return jumlahDaun(root->left) + jumlahDaun(root->right);
+    return 0;
 }
 
 // =============================================================================
